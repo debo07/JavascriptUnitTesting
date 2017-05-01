@@ -23,4 +23,31 @@ describe('calculator', function () {
 		});
 	});
 
+	describe('average', function() {
+		it('1,2,3 should yield 2', function() {
+			expect(calculator.average(1,2,3)).toBe(2);
+		});
+	});
+
+	describe('SpyOn test', function() {
+		beforeEach( function() {
+			spyOn( calculator, 'addAll');
+		});
+
+		it('calls the addAll() method while executing average', function() {
+			calculator.average(1,2,3);
+			expect( calculator.addAll ).toHaveBeenCalled();
+		});
+
+		it('calls the addAll() method with arguments array', function() {
+			calculator.average(3,5,7);
+			expect( calculator.addAll ).toHaveBeenCalledWith([3,5,7]);
+		});
+
+		it('doesnt call addAll() method if there is no argument for average method', function() {
+			calculator.average();
+			expect( calculator.addAll ).not.toHaveBeenCalled();
+		});
+	});
+
 });
