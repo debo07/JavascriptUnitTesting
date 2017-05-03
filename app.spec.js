@@ -50,4 +50,20 @@ describe('calculator', function () {
 		});
 	});
 
+	describe('Create your own spy', function() {
+		it('calls the fake addAll method', function() {
+			calculator.addAll = jasmine.createSpy("addAll() spy");
+			calculator.average(3,5,7);
+			expect( calculator.addAll ).toHaveBeenCalled();
+		});
+
+		it('returns the result from fake method', function() {
+			calculator.addAll = jasmine.createSpy("addAll() spy").and.callFake( function() {
+				return 15;
+			});
+			calculator.average( 3,5,7);
+			expect( calculator.addAll ).toHaveBeenCalled();
+		});
+	});
+
 });
